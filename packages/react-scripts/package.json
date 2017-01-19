@@ -22,6 +22,9 @@
   "bin": {
     "react-scripts": "./bin/react-scripts.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
