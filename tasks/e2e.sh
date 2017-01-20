@@ -76,7 +76,8 @@ then
 fi
 
 # Lint own code
-./node_modules/.bin/eslint --ignore-path .gitignore ./
+# DP: we use eslint-config-datapipeline in react-scripts, just skip it
+./node_modules/.bin/eslint --ignore-path .gitignore --ignore-pattern packages/react-scripts ./
 
 # ******************************************************************************
 # First, test the create-react-app development environment.
