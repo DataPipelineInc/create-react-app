@@ -153,7 +153,8 @@ test -e build/*.html
 test -e build/static/js/*.js
 test -e build/static/css/*.css
 test -e build/static/media/*.svg
-test -e build/favicon.ico
+# DP: We remove the favicon.ico
+# test -e build/favicon.ico
 
 # Run tests with CI flag
 CI=true npm test
@@ -183,7 +184,8 @@ test -e build/*.html
 test -e build/static/js/*.js
 test -e build/static/css/*.css
 test -e build/static/media/*.svg
-test -e build/favicon.ico
+# DP: We remove the favicon.ico
+# test -e build/favicon.ico
 
 # Run tests, overring the watch option to disable it.
 # `CI=true npm test` won't work here because `npm test` becomes just `jest`.
