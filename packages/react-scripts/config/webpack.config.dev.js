@@ -198,7 +198,7 @@ module.exports = {
   // @remove-on-eject-begin
   // Point ESLint to our predefined config.
   eslint: {
-    configFile: path.join(__dirname, '../.eslintrc'),
+    configFile: path.join(__dirname, '../.eslintrc.js'),
     useEslintrc: false
   },
   // @remove-on-eject-end
