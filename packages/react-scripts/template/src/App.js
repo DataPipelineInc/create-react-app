@@ -31,6 +31,7 @@ function App() {
             Support scss modules
             <span className={scssModules.feature}> (this sentence is styled by scss modules)</span>
           </li>
+          <li>Support <b>stage-0</b> and <b>decorators</b></li>
         </ul>
       </section>
     </div>
