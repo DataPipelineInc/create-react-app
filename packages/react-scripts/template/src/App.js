@@ -1,5 +1,8 @@
 import React from 'react'
-import logo from './logo.svg'
+// You can absolutely import from `src` by default.
+// If you want to define another module resolve path,
+// use process.env.NODE_PATH
+import logo from 'logo.svg'
 import './App.global.css'
 import './App.global.scss'
 import cssModules from './App.css'
@@ -32,6 +35,7 @@ function App() {
             <span className={scssModules.feature}> (this sentence is styled by scss modules)</span>
           </li>
           <li>Support <b>stage-0</b> and <b>decorators</b></li>
+          <li>Support absolutely importing from `./src`</li>
         </ul>
       </section>
     </div>
