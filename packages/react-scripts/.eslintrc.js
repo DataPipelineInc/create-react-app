@@ -5,6 +5,9 @@ module.exports = {
   "env": {
     "jest": true,
   },
+  "globals": {
+    "__DEV__": false
+  },
   "settings": {
     "import/parser": "babel-eslint",
     "import/resolver": {

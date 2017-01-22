@@ -157,7 +157,10 @@ module.exports = {
         query: {
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app'), require.resolve('babel-preset-stage-0')],
-          plugins: [require.resolve('babel-plugin-transform-decorators-legacy')],
+          plugins: [
+            require.resolve('babel-plugin-transform-decorators-legacy'),
+            require.resolve('babel-preset-fbjs/plugins/dev-expression')
+          ],
         },
         // @remove-on-eject-end
       },

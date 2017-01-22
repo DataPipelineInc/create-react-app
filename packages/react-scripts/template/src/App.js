@@ -9,6 +9,11 @@ import cssModules from './App.css'
 import scssModules from './App.scss'
 
 function App() {
+  if (__DEV__) {
+    // eslint-disable-next-line no-console
+    console.log('You are in dev env')
+  }
+
   return (
     <div className="App">
       <div className="App-header">
@@ -36,6 +41,7 @@ function App() {
           </li>
           <li>Support <b>stage-0</b> and <b>decorators</b></li>
           <li>Support absolutely importing from `./src`</li>
+          <li>Support `__DEV__`</li>
         </ul>
       </section>
     </div>
