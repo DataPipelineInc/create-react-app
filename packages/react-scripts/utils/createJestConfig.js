@@ -23,6 +23,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
     collectCoverageFrom: ['src/**/*.{js,jsx}'],
     setupFiles: [resolve('config/polyfills.js')],
     setupTestFrameworkScriptFile: setupTestsFile,
+    "modulePaths": [paths.appSrc],
     testPathIgnorePatterns: [
       '<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]'
     ],
