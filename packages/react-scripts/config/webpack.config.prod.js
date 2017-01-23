@@ -40,7 +40,7 @@ function ensureSlash(path, needsSlash) {
 // Webpack needs to know it to put the right <script> hrefs into HTML even in
 // single-page apps that may serve index.html for nested URLs like /todos/42.
 // We can't use a relative path in HTML because we don't want to load something
-// like /todos/42/static/js/bundle.7289d.js. We have to know the root.
+// like /todos/42/js/bundle.7289d.js. We have to know the root.
 var homepagePath = require(paths.appPackageJson).homepage;
 var homepagePathname = homepagePath ? url.parse(homepagePath).pathname : '/';
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -79,8 +79,8 @@ module.exports = {
     // Generated JS file names (with nested folders).
     // There will be one main bundle, and one file per asynchronous chunk.
     // We don't currently advertise code splitting but Webpack supports it.
-    filename: 'static/js/[name].[chunkhash:8].js',
-    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].chunk.js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath
   },
@@ -146,7 +146,7 @@ module.exports = {
         loader: 'url',
         query: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
+          name: 'media/[name].[hash:8].[ext]'
         }
       },
       // Process JS with Babel.
@@ -205,7 +205,7 @@ module.exports = {
         test: /\.svg$/,
         loader: 'file',
         query: {
-          name: 'static/media/[name].[hash:8].[ext]'
+          name: 'media/[name].[hash:8].[ext]'
         }
       }
     ]
@@ -287,7 +287,7 @@ module.exports = {
       }
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin('static/css/[name].[contenthash:8].css'),
+    new ExtractTextPlugin('css/[name].[contenthash:8].css'),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.

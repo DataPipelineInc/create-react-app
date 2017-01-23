@@ -88,9 +88,9 @@ fi
 npm run build
 # Check for expected output
 test -e build/*.html
-test -e build/static/js/*.js
-test -e build/static/css/*.css
-test -e build/static/media/*.svg
+test -e build/js/*.js
+test -e build/css/*.css
+test -e build/media/*.svg
 # DP: We remove the favicon.ico
 # test -e build/favicon.ico
 
@@ -151,9 +151,9 @@ cd test-app
 npm run build
 # Check for expected output
 test -e build/*.html
-test -e build/static/js/*.js
-test -e build/static/css/*.css
-test -e build/static/media/*.svg
+test -e build/js/*.js
+test -e build/css/*.css
+test -e build/media/*.svg
 # DP: We remove the favicon.ico
 # test -e build/favicon.ico
 
@@ -182,9 +182,9 @@ npm link $root_path/packages/react-scripts
 npm run build
 # Check for expected output
 test -e build/*.html
-test -e build/static/js/*.js
-test -e build/static/css/*.css
-test -e build/static/media/*.svg
+test -e build/js/*.js
+test -e build/css/*.css
+test -e build/media/*.svg
 # DP: We remove the favicon.ico
 # test -e build/favicon.ico
 
