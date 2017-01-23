@@ -13,6 +13,7 @@
   "files": [
     ".babelrc",
     ".eslintrc.js",
+    ".stylelintrc",
     "bin",
     "config",
     "scripts",
