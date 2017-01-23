@@ -15,6 +15,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+var StyleLintPlugin = require('stylelint-webpack-plugin');
 var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
@@ -232,6 +233,12 @@ module.exports = {
     ];
   },
   plugins: [
+    new StyleLintPlugin({
+      configFile: path.join(__dirname, '../.stylelintrc'),
+      context: paths.appSrc,
+      files: '**/*.{c,sc,sa,le}ss',
+      failOnError: true,
+    }),
     // Makes the public URL available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In production, it will be an empty string unless you specify "homepage"

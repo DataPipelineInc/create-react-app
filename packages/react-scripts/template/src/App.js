@@ -42,6 +42,7 @@ function App() {
           <li>Support <b>stage-0</b> and <b>decorators</b></li>
           <li>Support absolutely importing from `./src`</li>
           <li>Support `__DEV__`</li>
+          <li>Support stylelint</li>
         </ul>
       </section>
     </div>
