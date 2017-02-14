@@ -165,6 +165,12 @@ module.exports = {
         },
         // @remove-on-eject-end
       },
+
+      // DP:
+      // 1. resolve css as normal(global) css
+      // 2. resolve scss as css-module by default
+      // 3. resolve .g.scss as normal(global) scss
+
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -178,13 +184,9 @@ module.exports = {
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
       {
-        test: /\.(g|global)\.css$/,
+        test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss')
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
-      },
-      {
-        test: path => /\.css$/.test(path) && !/\.(g|global)\.css$/.test(path),
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1!postcss')
       },
       {
         test: /\.(g|global)\.(scss|sass)$/,
@@ -238,6 +240,7 @@ module.exports = {
       context: paths.appSrc,
       files: '**/*.{c,sc,sa,le}ss',
       failOnError: true,
+      lintDirtyModulesOnly: true,
     }),
     // Makes the public URL available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

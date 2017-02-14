@@ -163,18 +163,20 @@ module.exports = {
           cacheDirectory: true
         }
       },
+
+      // DP:
+      // 1. resolve css as normal(global) css
+      // 2. resolve scss as css-module by default
+      // 3. resolve .g.scss as normal(global) scss
+
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
       // "style" loader turns CSS into JS modules that inject <style> tags.
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
       {
-        test: /\.(g|global)\.css$/,
-        loader: 'style!css?importLoaders=1!postcss'
-      },
-      {
-        test: path => /\.css$/.test(path) && !/\.(g|global)\.css$/.test(path),
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
+        test: /\.css$/,
+        loader: 'style!css?importLoaders=1!postcss',
       },
       {
         test: /\.(g|global)\.(scss|sass)$/,
@@ -225,6 +227,7 @@ module.exports = {
       configFile: path.join(__dirname, '../.stylelintrc'),
       context: paths.appSrc,
       files: '**/*.{c,sc,sa,le}ss',
+      lintDirtyModulesOnly: true,
     }),
     // Makes the public URL available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
