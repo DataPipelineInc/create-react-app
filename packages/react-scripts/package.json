@@ -1,14 +1,14 @@
 {
-  "name": "react-scripts",
-  "version": "1.0.7",
-  "description": "Configuration and scripts for Create React App.",
-  "repository": "facebookincubator/create-react-app",
+  "name": "react-scripts-datapipeline",
+  "version": "0.0.6",
+  "description": "Configuration and scripts for Create React App used in Data Pipeline Inc.",
+  "repository": "DataPipelineInc/create-react-app",
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=6"
   },
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/DataPipelineInc/create-react-app/issues"
   },
   "files": [
     "bin",
