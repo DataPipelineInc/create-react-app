@@ -190,6 +190,9 @@ E2E_FILE=./build/index.html \
 # Finally, let's check that everything still works after ejecting.
 # ******************************************************************************
 
+### Skip eject tests
+if [ "yes" = "no" ]; then
+
 # Unlink our preset
 npm unlink "$root_path"/packages/babel-preset-react-app
 
@@ -249,6 +252,9 @@ E2E_FILE=./build/index.html \
   NODE_PATH=src \
   PUBLIC_URL=http://www.example.org/spa/ \
   node_modules/.bin/mocha --require babel-register --require babel-polyfill integration/*.test.js
+
+### End of skip eject tests
+fi
 
 # Cleanup
 cleanup

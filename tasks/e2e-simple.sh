@@ -277,6 +277,9 @@ verify_module_scope
 # Finally, let's check that everything still works after ejecting.
 # ******************************************************************************
 
+### Skip eject tests
+if [ "yes" = "no" ]; then
+
 # Eject...
 echo yes | npm run eject
 
@@ -311,6 +314,9 @@ verify_env_url
 
 # Test reliance on webpack internals
 verify_module_scope
+
+### End of skip eject tests
+fi
 
 # Cleanup
 cleanup

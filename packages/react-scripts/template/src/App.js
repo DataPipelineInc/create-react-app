@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './App.global.scss';
-import scssModules from './App.scss';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import './App.global.scss'
+import scssModules from './App.scss'
 
 class App extends Component {
+  componentDidMount() {
+    if (__DEV__) {
+      // eslint-disable-next-line no-console
+      console.log('You are in dev env')
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -31,11 +38,13 @@ class App extends Component {
                 (this sentence is styled by scss modules)
               </span>
             </li>
+            <li>Support <b>stage-0</b> and <b>decorators</b></li>
+            <li>Support `__DEV__`</li>
           </ul>
         </section>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
