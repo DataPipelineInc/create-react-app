@@ -43,6 +43,9 @@ module.exports = (resolve, rootDir, isEjecting) => {
       '^.+\\.(css|sass|scss)$': 'identity-obj-proxy',
     },
     moduleFileExtensions: ['web.js', 'js', 'json', 'web.jsx', 'jsx', 'node'],
+    globals: {
+      __DEV__: true,
+    },
   };
   if (rootDir) {
     config.rootDir = rootDir;

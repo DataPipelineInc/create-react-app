@@ -187,10 +187,12 @@ module.exports = {
               // TODO: consider separate config for production,
               // e.g. to enable no-console and no-debugger only in production.
               baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
+                extends: [require.resolve('eslint-config-datapipeline')],
               },
-              ignore: false,
+              ignore: process.env.TEST_SUITE === 'kitchensink',
               useEslintrc: false,
+              ignorePattern:
+                process.env.TEST_SUITE === 'kitchensink' ? '*.js' : '',
               // @remove-on-eject-end
             },
             loader: require.resolve('eslint-loader'),
@@ -221,7 +223,7 @@ module.exports = {
             options: {
               // @remove-on-eject-begin
               babelrc: false,
-              presets: [require.resolve('babel-preset-react-app')],
+              presets: [require.resolve('babel-preset-datapipeline')],
               // @remove-on-eject-end
               compact: true,
             },
