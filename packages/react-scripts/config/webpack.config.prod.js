@@ -54,6 +54,52 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
     { publicPath: Array(cssFilename.split('/').length).join('../') }
   : {};
 
+function getCssLoaders(useCssModules, forScss) {
+  const loaders = [
+    {
+      loader: require.resolve('css-loader'),
+      options: {
+        modules: !!useCssModules,
+        importLoaders: 1,
+        minimize: true,
+        sourceMap: true,
+      },
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: {
+        ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+        plugins: () => [
+          require('postcss-flexbugs-fixes'),
+          autoprefixer({
+            browsers: [
+              '>1%',
+              'last 4 versions',
+              'Firefox ESR',
+              'not ie < 9', // React doesn't support IE8 anyway
+            ],
+            flexbox: 'no-2009',
+          }),
+        ],
+      },
+    },
+  ];
+
+  if (forScss) {
+    loaders.push(require.resolve('sass-loader'));
+  }
+
+  return ExtractTextPlugin.extract(
+    Object.assign(
+      {
+        fallback: require.resolve('style-loader'),
+        use: loaders,
+      },
+      extractTextPluginOptions
+    )
+  );
+}
+
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -160,6 +206,7 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
+          /\.(scss|sass)$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
@@ -207,43 +254,18 @@ module.exports = {
       // in the main CSS file.
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          Object.assign(
-            {
-              fallback: require.resolve('style-loader'),
-              use: [
-                {
-                  loader: require.resolve('css-loader'),
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                    sourceMap: true,
-                  },
-                },
-                {
-                  loader: require.resolve('postcss-loader'),
-                  options: {
-                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                    plugins: () => [
-                      require('postcss-flexbugs-fixes'),
-                      autoprefixer({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9', // React doesn't support IE8 anyway
-                        ],
-                        flexbox: 'no-2009',
-                      }),
-                    ],
-                  },
-                },
-              ],
-            },
-            extractTextPluginOptions
-          )
-        ),
+        loader: getCssLoaders(),
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+      {
+        test: /\.(g|global)\.(scss|sass)$/,
+        use: getCssLoaders(false, true),
+      },
+      {
+        test: path =>
+          /\.(scss|sass)$/.test(path) &&
+          !/\.(g|global)\.(scss|sass)$/.test(path),
+        use: getCssLoaders(true, true),
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.

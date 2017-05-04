@@ -32,6 +32,45 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+function getCssLoaders(useCssModules, forScss) {
+  const loaders = [
+    require.resolve('style-loader'),
+    {
+      loader: require.resolve('css-loader'),
+      options: {
+        modules: !!useCssModules,
+        importLoaders: 1,
+        localIdentName: useCssModules
+          ? '[name]__[local]___[hash:base64:5]'
+          : undefined,
+      },
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: {
+        ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+        plugins: () => [
+          require('postcss-flexbugs-fixes'),
+          autoprefixer({
+            browsers: [
+              '>1%',
+              'last 4 versions',
+              'Firefox ESR',
+              'not ie < 9', // React doesn't support IE8 anyway
+            ],
+            flexbox: 'no-2009',
+          }),
+        ],
+      },
+    },
+  ];
+
+  if (forScss) {
+    loaders.push(require.resolve('sass-loader'));
+  }
+  return loaders;
+}
+
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
@@ -161,6 +200,7 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
+          /\.(scss|sass)$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
@@ -199,6 +239,12 @@ module.exports = {
           cacheDirectory: true,
         },
       },
+
+      // DP:
+      // 1. resolve css as normal(global) css
+      // 2. resolve scss as css-module by default
+      // 3. resolve .g.scss as normal(global) scss
+
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
       // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -206,33 +252,17 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
-                }),
-              ],
-            },
-          },
-        ],
+        use: getCssLoaders(),
+      },
+      {
+        test: /\.(g|global)\.(scss|sass)$/,
+        use: getCssLoaders(false, true),
+      },
+      {
+        test: path =>
+          /\.(scss|sass)$/.test(path) &&
+          !/\.(g|global)\.(scss|sass)$/.test(path),
+        loader: getCssLoaders(true, true),
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
