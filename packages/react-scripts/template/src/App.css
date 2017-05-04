@@ -26,3 +26,13 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.App-features {
+  max-width: 640px;
+  margin: 36px auto;
+}
+
+.App-feature-list > li {
+  text-align: left;
+  line-height: 1.6;
+}
