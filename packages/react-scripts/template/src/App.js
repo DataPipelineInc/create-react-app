@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
+// You can absolutely import from `src` by default.
+import logo from 'logo.svg'
 import './App.css'
 import './App.global.scss'
 import scssModules from './App.scss'
@@ -38,8 +39,11 @@ class App extends Component {
                 (this sentence is styled by scss modules)
               </span>
             </li>
-            <li>Support <b>stage-0</b> and <b>decorators</b></li>
+            <li>
+              Support <b>stage-0</b> and <b>decorators</b>
+            </li>
             <li>Support `__DEV__`</li>
+            <li>Support absolutely importing from `./src`</li>
           </ul>
         </section>
       </div>

@@ -43,6 +43,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
       '^.+\\.(css|sass|scss)$': 'identity-obj-proxy',
     },
     moduleFileExtensions: ['web.js', 'js', 'json', 'web.jsx', 'jsx', 'node'],
+    modulePaths: [paths.appSrc],
     globals: {
       __DEV__: true,
     },
