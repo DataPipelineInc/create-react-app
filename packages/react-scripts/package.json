@@ -1,6 +1,6 @@
 {
   "name": "react-scripts-datapipeline",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Configuration and scripts for Create React App used in Data Pipeline Inc.",
   "repository": "DataPipelineInc/create-react-app",
   "license": "MIT",
